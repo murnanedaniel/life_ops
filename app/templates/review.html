@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeOps MVP - Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+
+<div class="container mx-auto p-4">
+    <h1 class="text-4xl mb-4 text-center">LifeOps MVP - AI Review</h1>
+
+    <div class="bg-white p-6 rounded shadow-md">
+        <h2 class="text-2xl mb-4">AI Feedback</h2>
+        <p class="mb-4">{{ feedback }}</p>
+        <form action="/commit" method="post">
+            <input type="hidden" name="content" value="{{ merge_request_content }}">
+            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">Commit to Life Document</button>
+        </form>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
