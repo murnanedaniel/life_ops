@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>LifeOps MVP - Merge Requests</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container mx-auto p-4">
+        <h1 class="text-4xl mb-4 text-center">Merge Requests</h1>
+
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="w-1/3 py-2">Content</th>
+                    <th class="w-1/3 py-2">Feedback</th>
+                    <th class="w-1/12 py-2">Approved</th>
+                    <th class="w-1/12 py-2">Iterations</th>
+                    <th class="w-1/6 py-2">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mr in merge_requests %}
+                <tr>
+                    <td class="border-t py-2">{{ mr.content }}</td>
+                    <td class="border-t py-2">{{ mr.feedback }}</td>
+                    <td class="border-t py-2">{{ 'Yes' if mr.approval else 'No' }}</td>
+                    <td class="border-t py-2">{{ mr.iterations }}</td>
+                    <td class="border-t py-2">{{ mr.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

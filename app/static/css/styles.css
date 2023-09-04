@@ -1,11 +1,90 @@
-.markdown-content h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    background-color: #ffffff;
 }
 
-.markdown-content h2 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
 }
 
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
 
+/* Markdown body unordered list stylining should show dots*/
+.markdown-body ul {
+    list-style-type: disc;
+}
+
+/* Markdown body ordered list stylining should show numbering*/
+.markdown-body ol {
+    list-style-type: decimal;
+}
+
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #24292E;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .brand {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+/* Button Styling */
+button {
+    border: none;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: #564958;
+}
+
+button:hover {
+    background-color: #4a374e;
+}
+
+button:disabled {
+    background-color: #d4d4d4;
+    cursor: not-allowed;
+}
+
+form {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+textarea {
+    resize: none; /* Disables the resize handle */
+    overflow: hidden; /* Hides scrollbar */
+}

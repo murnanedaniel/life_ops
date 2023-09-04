@@ -2,31 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LifeOps MVP</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen font-sans">
-  
-<div class="container mx-auto p-4">
-    <h1 class="text-4xl mb-4 text-center">LifeOps MVP</h1>
+<body class="bg-white-100 h-screen font-montserrat">
+    {% include 'navbar.html' %}
 
-    <div class="bg-white p-6 rounded shadow-md">
-        <h2 class="text-2xl mb-4">Life Document</h2>
-        <div class="markdown-content">
-            {{ life_document_content|markdown }}
+    <div class="container mx-auto h-screen flex items-center">
+        <div class="text-left">
+          <div id="typing-text" class="text-4xl mb-4 inline-block"></div>
+          <div id="input-container" class="relative">
+            <textarea id="message" class="w-full h-16 text-4xl font-bold bg-transparent outline-none"></textarea>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                <div class="w-2 h-2 bg-black rounded-full animate-ping"></div>
+            </div>
         </div>
-
-    <div class="mt-6 bg-white p-6 rounded shadow-md">
-        <h2 class="text-2xl mb-4">Submit Merge Request</h2>
-        <form action="/" method="post">
-            <textarea name="content" class="w-full h-32 p-4 mb-4 border rounded" placeholder="Describe your task, goal, or idea..."></textarea>
-            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Submit</button>
-        </form>
-    </div>
-</div>
-
-<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        
+          <div id="chat-log"></div>
+        
+        </div>
+      </div>
+    <script>
+        const text = "Let's get your life organized...<br>Start by telling me about your goals, projects, and habits:";
+        let index = 0;
+    
+        function type() {
+            const typingText = document.getElementById("typing-text");
+            typingText.innerHTML = text.substring(0, index);
+            index++;
+            if (index > text.length) {
+                clearInterval(timer);
+                const inputContainer = document.getElementById("input-container");
+                inputContainer.classList.remove("hidden");
+                const inputField = document.getElementById("message");
+                inputField.focus();
+            }
+            }
+    
+        const timer = setInterval(type, 50);
+    </script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </body>
 </html>

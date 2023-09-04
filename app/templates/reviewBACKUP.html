@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeOps MVP - Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+
+    <div class="navbar">
+        <div class="brand">LifeOps</div>
+        <nav>
+            <a href="/" style="color: white; text-decoration: none;">Home</a>
+            <!-- Add more navigation links as necessary -->
+        </nav>
+    </div>
+
+<div class="container mx-auto p-4">
+    <h1 class="text-4xl mb-4 text-center">Merge Request Review</h1>
+
+    <!-- <div class="bg-white p-6 rounded">
+        <h2 class="text-2xl mb-4">AI Feedback</h2>
+            <div class="markdown-body">
+                {{ feedback|markdown }}
+            </div>
+
+        <!-- The response also returns an "approval" parameter. If this is set to true, then state this and allow the merge button, else state false and disable the merge button -->
+        <!-- {% if approval %}
+            <h2 class="text-2xl mb-4 text-green-500">Merge Request Approved</h2>
+            <form action="/commit" method="post">
+                <input type="hidden" name="content" value="{{ merge_request_content }}">
+                <button type="submit" class="text-white px-6 py-2 rounded">Commit to Life Document</button>
+            </form>
+        {% else %}
+            <h2 class="text-2xl mb-4 text-red-500">Merge Request Denied</h2>
+            <button type="submit" class="text-white px-6 py-2 rounded" disabled>Commit to Life Document</button>
+        {% endif %}
+    </div> -->
+    <div class="bg-white p-6 rounded">
+        <h2 class="text-2xl mb-4">AI Feedback</h2>
+        {% for i in range(iterations) %}
+            <div class="rounded shadow-lg mb-6 p-6">
+                <h3>Iteration {{ i }}:</h3>
+                <div class="markdown-body">
+                    {{ feedback[i]|markdown }}
+                </div>
+                {% if i == iterations - 1 %} <!-- if last iteration -->
+                    <form action="/update_merge_request" method="post">
+                        <textarea name="content" class="w-full h-32 p-4 mb-4 border rounded" placeholder="Update your merge_request">{{ merge_request_content[i] }}</textarea>
+                        <button type="submit" class="text-white px-6 py-2 rounded">Update Merge Request</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

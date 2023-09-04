@@ -8,20 +8,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body class="bg-gray-100 h-screen font-sans">
+    {% include 'navbar.html' %}
 
-<div class="container mx-auto p-4">
-    <h1 class="text-4xl mb-4 text-center">LifeOps MVP - AI Review</h1>
+    <div class="container mx-auto p-4">
+        <h1 class="text-4xl mb-4 text-center">Merge Request Review</h1>
 
-    <div class="bg-white p-6 rounded shadow-md">
-        <h2 class="text-2xl mb-4">AI Feedback</h2>
-        <p class="mb-4">{{ feedback }}</p>
-        <form action="/commit" method="post">
-            <input type="hidden" name="content" value="{{ merge_request_content }}">
-            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">Commit to Life Document</button>
-        </form>
+        <!-- Merge Request Review -->
+        <div class="bg-white p-6 rounded">
+            <h2 class="text-2xl mb-4">AI Feedback</h2>
+            <form id="review-form" method="post">
+                <textarea id="content" name="content" class="w-full h-32 p-4 mb-4 border rounded" placeholder="Update your merge_request">{{ merge_request_content }}</textarea>
+                <p id="feedback" class="mt-4">{{ feedback }}</p>
+                <p id="approval" class="mt-4 text-2xl" style="color: {{ 'green' if approval else 'red' }}">{{ 'Merge Request Approved' if approval else 'Merge Request Denied' }}</p>
+                <button id="commit-btn" type="button" class="text-white px-6 py-2 rounded" {{ 'disabled' if not approval }}>Commit to Life Document</button>
+                <button id="submit-request-btn" type="button" class="text-white px-6 py-2 rounded">Submit Request</button>
+            </form>
+        </div>
+
+        <!-- Historical Reviews -->
+        <div class="bg-white p-6 rounded mt-6">
+            <h2 class="text-2xl mb-4">History</h2>
+            <div id="history">
+            <!-- History contents would go here -->
+            </div>
+        </div>
     </div>
-</div>
 
-<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
